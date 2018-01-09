@@ -1,0 +1,77 @@
+\documentclass[a4paper,12pt,twoside,openright,openany]{report}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \usepackage{newtxmath,newtxtext}
+    \usepackage{enumitem}
+    \usepackage[a4paper, left=4cm, top=2.5cm, right=2.5cm, bottom=2.5cm]{geometry}
+    \usepackage{graphicx}
+    \graphicspath{{images/}}
+    \usepackage{amsmath}
+    %\usepackage{textcase}
+    \usepackage{titlesec}
+    \usepackage{tocloft,calc}
+    \usepackage{apacite}
+    \usepackage{url}
+    \usepackage{tikz}
+    \usetikzlibrary{calc}
+    \usepackage{float}
+    \usepackage{textcomp}
+    \usepackage{minted}
+	
+    %===============Example Title Formatting================
+    \titleformat{\chapter}                  % command
+    [display]                               % shape
+    {\centering\bfseries\fontsize{12}{12}}  % format
+    {CHAPTER \thechapter}                   % label
+    {0ex}{}
+    
+    \titleformat{\section}                  % command
+    {\bfseries\fontsize{12}{12}}            % format
+    {\thesection\ }                         % label
+    {0ex}{}
+
+    \titleformat{\subsection}               % command
+    {\bfseries\fontsize{12}{12}}            % format
+    {\thesubsection\ }                         % label
+    {0ex}{}
+
+    \titleformat{\paragraph}               % command
+    {\bfseries\fontsize{12}{12}}            % format
+    {\thesubsection\ }                         % label
+    {0ex}{}
+
+    \titlespacing*{\paragraph}
+    {0pt}{2ex}{0ex}
+
+    \titlespacing*{\chapter}
+    {0pt}{0ex}{2ex}
+
+    \setlength{\parskip}{1.2ex}             % paragraph spacing
+    %===============Example Title Formatting================
+    \renewcommand{\cftchappresnum}{CHAPTER } % ToC add Chapter 
+    \setlength{\cftbeforetoctitleskip}{0em}  % ToC Title spacing
+    \setlength{\cftaftertoctitleskip}{1em}   % ToC Title spacing
+    \setlength{\cftbeforeloftitleskip}{0em}  % LoF Title spacing
+    \setlength{\cftafterloftitleskip}{1em}   % LoF Title spacing
+
+    \AtBeginDocument{\addtolength\cftchapnumwidth{\widthof{\bfseries CHAPTER }}}
+
+    \title{IMPLEMENTATION OF MQTT MESSAGE QUEUE BROKER FOR SECURE VERIFICATION}
+    \author{Tiffany, Antonious George Sunggeriwan, Chrisando Eka Pramudhita}
+    \date{\today}
+    \begin{document}
+        \maketitle
+        \renewcommand{\baselinestretch}{1}\normalsize
+        \tableofcontents
+        \renewcommand{\baselinestretch}{1.5}\normalsize
+        \clearpage
+        \listoffigures
+        \input{chapters/1one/one.tex}
+        \input{chapters/2two/two.tex}
+        \input{chapters/3three/three.tex}
+        \input{chapters/4four/four.tex}
+        \input{chapters/5five/five.tex}
+
+        \bibliographystyle{apacite}
+        \bibliography{citations}
+    \end{document}

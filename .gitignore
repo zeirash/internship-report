@@ -1,0 +1,17 @@
+*/build
+.idea/
+*.bbl
+*.blg
+*.log
+*.pdf
+*.aux
+*.dvi
+*.synctex.gz
+*.synctex
+*.toc
+*.lof
+index.fdb_latexmk
+index.fls
+index.dvi
+.DS_STORE
+_minted-index/

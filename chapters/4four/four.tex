@@ -1,0 +1,202 @@
+\chapter{RESULT AND DISCUSSION}
+\section{System Specification}
+
+Because of limited cost and resources, we use different specification from the current system that are being employed at PT. XYZ's deployment. We use two computers, one used to host the web server and the broker, the other used to emulate the clients. The specifications are:
+
+% TODO: Complete spec when back home
+\begin{enumerate}
+
+    \itemsep0em
+    \item Desktop PC
+
+    This computer is used to run the broker and webserver.
+    
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|l|l|}
+            \hline Processor & Intel\textsuperscript{\textregistered} Core\texttrademark i7-6700k CPU @ 4.00GHz\\ 
+            \hline Ram & 16 GB 3200 MHz DDR4 \\
+            \hline Operating System & Ubuntu 17.10 \\
+            \hline
+        \end{tabular}
+        \caption{Desktop PC specification}\label{fig:desktop-spec}
+    \end{table}
+
+    \item MacBook Pro 
+    
+    This computer is used to generate the client that will be used to load test the webserver and the broker using locust.
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|l|l|}
+            \hline Processor & Intel\textsuperscript{\textregistered} Core\texttrademark  i5-7267U CPU @ 3.10GHz\\
+            \hline Ram & 8 GB 2133 MHz LP-DDR3 \\
+            \hline Operating System & macOS 10.13.3 \\
+            \hline
+        \end{tabular}
+        \caption{MacBook specification}\label{fig:macbook-spec}
+    \end{table}
+
+\end{enumerate}
+
+% TODO: this is maybe unnecessry or incomplete
+These computers are connected to the same local area network by cables directly to the router to make sure that they have a stable connection.
+
+\section{System Design}
+\subsection{Socket Implementation}
+\paragraph{Server side}
+\begin{figure}[h]
+\centering
+\inputminted{kotlin}{code/message.kt}
+\caption{Message class code}
+\label{fig:msg-socket}
+\end{figure}
+
+The payload that we tested for request-respond between client and server consist of 2 data, which can be seen on Figure \ref{fig:msg-socket}
+
+\begin{figure}[h]
+\inputminted[firstline=26,lastline=34]{kotlin}{code/socket-main.kt}
+\caption{Setting up TLS in Socket}
+\label{fig:socket-tls}
+\end{figure}
+
+\paragraph{Client side}
+%TODO: embed illustration of 1000 client connecting directly to server
+
+We use locust to emulate 1000 different client that will swarm the web server. These client will run on the MacBook and are communicating with the web server directly using socket over TLS. The web server will be running on the Desktop PC. We separated the clients and web server to make sure that they don't interfere with each other's performance.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{locust-socket.png}
+\caption{Locust client implementation for socket}\label{fig:locust-socket}
+\end{figure}
+
+The webserver runs on the Desktop PC, it will always be waiting for new client to connect, every time a new client connects, it will create a new thread to handle messages that it receives from the client. Each client message will contain an encrypted data written in JSON format. The 
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\linewidth]{webserver-socket.png}
+\caption{Web server implementation for socket}\label{fig:webserver-socket}
+\end{figure}
+
+\subsection{MQTT Implementation}
+\paragraph{Server side}
+%input payload code pic, same like socket
+%TODO: what is the third parameter of mqttclient?
+The code at Figure \ref{fig:mqttc-server} is to make the server becomes a MQTT client. We generated random 20 bytes alphanumeric using a library and store the value to variable clientId. 
+%explain mqtt client
+\begin{figure}[h]
+\inputminted[firstline=12]{kotlin}{code/mqtt-main.kt}
+\inputminted[firstline=25, lastline=30]{kotlin}{code/mqtt-main.kt}
+\caption{Initialize MQTT client on server side}
+\label{fig:mqttc-server}
+\end{figure}
+
+After that, we create MQTT client which takes 3 parameters. First is the IP of the broker. In this case we use mosquito on local host which already have ssl applied, and open the connection at port 8883. second is the client id, and third ....
+
+\begin{figure}[h]
+\inputminted[firstline=31]{kotlin}{code/mqtt-main.kt}
+\caption{A callback function}
+\label{fig:mqtt-callback}
+\end{figure}
+%TODO: explain the callback
+At Figure \ref{fig:mqtt-callback}, we wrapped all functions inside a callback. Callback function is used to enable the server (as MQTT client) do the task asynchronously. This means the server can do other task while waiting for other client's response/request. When other client make a request/response, the server will be notified and can  serve the client's needed.
+
+\begin{figure}[h]
+\inputminted[firstline=36]{kotlin}{code/mqtt-main.kt}
+\caption{Client subscribing a topic}
+\label{fig:mqtt-subscribe}
+\end{figure}
+%TODO: explain topic subscribe
+Before a MQTT client get the desired message, it must subscribe to the certain topic. At Figure~\ref{fig:mqtt-subscribe}, the client subscribed ``+/token\_exchange''. When the message arrived, it will return 2 value, which will be assigned on the parameter (topic and message).
+
+\begin{figure}[h]
+\inputminted[firstline=13, lastline=14]{kotlin}{code/mqtt-main.kt}
+\inputminted[firstline=38, lastline=41]{kotlin}{code/mqtt-main.kt}
+\caption{Decrypting arrived message}
+\label{fig:mqtt-decrypt}
+\end{figure}
+%TODO: explain decrypt message
+
+\begin{figure}[h]
+\inputminted[firstline=46, lastline=62]{kotlin}{code/mqtt-main.kt}
+\caption{Decrypting arrived message}
+\label{fig:mqtt-decrypt}
+\end{figure}
+%TODO: explain validating process
+
+\paragraph{Client side}
+%TODO: embed image of 1000 client connecting to broker, then 1 broker connecting to 1 server.
+We again use locust to emulate 1000 clients to swarm the webserver. These clients will communicate with the web server through the broker, it'll be publishing to their own topic ``client\_id/token\_exchange'' when it's trying to ask for a new token to the server, and subscribing to  ``client\_id/token\_exchange/reply'' to listen for a reply.
+
+%embed pic of code?
+
+The web server communicate with the client through the broker and will be publishing replies to ``client\_id/token\_exchange/reply'' topic everytime it receives a request message from the ``client\_id/token\_exchange/reply'' topic, which it subscribes to.
+
+%embed pic of code?
+
+We use mosquitto, an implementation of MQTT broker made by apache as the broker that will be working as the middleman, forwarding the messages from client and server and making sure that the messages arrive successfully to their destination.
+
+%embed pic of mqtt broker config?
+
+\section{Testing}
+
+For this section, we decided to do 2 types of testing. First on normal network condition, and second on constrained network condition. This was done to proof that MQTT can help mitigate issues that arise when we manually implement a solution that uses socket. 
+
+On this tests we are recording how many un-synced token are happening in each of the configuration (these un-synced token condition simulates the \textit{double socket} problem), response time which we define as the time between sending a message and receiving a reply, and how many request per seconds are finishing and failing on each of the implementation.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{mqtt-user.png}
+\caption{number of clients simulated by locust over time}\label{fig:socket-user}
+\end{figure}
+
+Clients are gradually increased by 10 new clients per second as shown on figure \ref{fig:socket-user}. This is done to increase the load gradually so to give a more realistic representation of real life condition and to make it easier to track performance degradation as traffic grows.
+
+\subsection{Unconstrained Network}
+
+In this test, there will be no limit on connection speed between client, webserver, and broker. This is done to get a baseline performance reading that  exclude any network issues.
+
+\paragraph{Socket Implementation}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{socket-rps.png}
+\caption{Request per second that can be processed when using socket}\label{fig:socket-rps}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{socket-response.png}
+\caption{Response time that is achieved when using socket}\label{fig:socket-response}
+\end{figure}
+
+\paragraph{MQTT Implementation}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{mqtt-rps.png}
+\caption{Request per second that can be processed when using MQTT}\label{fig:mqtt-rps}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{mqtt-response.png}
+\caption{Response time that is achieved when using MQTT}\label{fig:mqtt-response}
+\end{figure}
+
+\paragraph{Discussion}
+
+Purely using only socket results in a very efficient implementation. Socket allows the programmers to have full control on how to send, check and verify all of the messages. This ability to control everything means that the programmers can optimize everything to their very specific use case as much as possible to achieve higher performance, although possibly with the cost of lower reliability and higher maintenance cost, since the programmer now need to think and design every part of the implementation by them self.
+
+\subsection{Simulated Constrained Network}
+
+To simulate a constrained network, the desktop PC's network adapter will be limited to an upload and download speed of 100KBps. Doing this will result in a slower connection between the Desktop PC (Who hosts the broker and webserver) and the MacBook (who hosts the clients). 
+
+The connection between the broker and the webserver won't be slowed down. We choose to make it this way because in the production environment, the two will likely lives together inside the data centers and be connected to each other through some high speed network, unlike the clients who can have varying degree of connection quality to the data centers.
+
+\paragraph{Socket Implementation}
+
+\paragraph{MQTT Implementation}
+
+\paragraph{Discussion}

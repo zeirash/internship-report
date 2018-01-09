@@ -1,0 +1,181 @@
+\chapter{METHODOLOGY OF RESEARCH}
+\section{Company Background}
+PT XYZ is an Indonesian bank founded on August 10, 1955. But start operating on 21 February 1957. In 1980s, PT XYZ started expanding their branch offices and other services. They also expanded their services to ATM (\textit{Anjungan Tunai Mandiri} or Automated Teller Machine). In 1991, PT XYZ started placing 50 units of ATM in some places in Jakarta.
+
+Many things happened since the bank was founded, but the most significant was the Asian financial crisis in 1997. It has tremendous impact on Indonesia's entire banking system, including PT XYZ. In particular, it affected PT XYZ's cash flow and threatened PT XYZ to go bankrupt. It drives PT XYZ to seek assistance from the Indonesian government. Finally the Indonesian Bank Restructuring Agency (IBRA) took over the control of the bank in 1998.
+
+At the same year, PT XYZ somehow fully recovered and it's assets stood at Rp 67.93 trillion. Public confidence of PT XYZ was finally restored, and in 2001 they were released by IBRA to BI (Bank Indonesia). In 2000, PT XYZ started become IPO (Initial public Offering) and selling their 22.55\% of their shares that were being divested by IBRA. On secondary public offering which was held on July 2001, PT XYZ offered their 10\% of total shares. Which left them 60.3\% of their own shares. In 2016, PT XYZ's shares are 52.85\% held by public.
+
+Until 2016, PT XYZ had more than 15 millions customer in Indonesia. To coordinate their enterprise to reach whole Indonesia, PT XYZ distributed into 12 regions which consist of 135 main branches, 874 sub branches, 222 and cash offices. PT XYZ had hired 25.073 employees in total, which increased by 4.5\% compared in 2015.
+
+Company's Vision:
+\begin{itemize}
+	\itemsep0em
+    \item To be the bank of choice and a major pillar of the Indonesian economy
+\end{itemize}
+
+Company's Mission:
+\begin{itemize}
+	\itemsep0em
+    \item To build centers of excellence in payment settlements and financial solutions for business and individuals
+    \item To understand diverse customer needs and provide the right financial services to optimize customer satisfaction
+    \item To enhance our corporate franchise and stakeholders value
+\end{itemize}
+
+\paragraph{Organization Structure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{organizational_structure.png}
+%\begin{tikzpicture}
+%	\tikzset{every node/.style=
+%        {thick, draw=black, align=center, minimum height=50pt, minimum width=100pt}
+%     }
+%	\node (root) at (5,3) [draw] {General Meeting\\of Shareholders};
+%	\node (l1n1) at (2,0) [draw] {Commissioners\\Board};
+%	\node (l1n2) at (8,0) [draw] {Directors};
+%	\node (l2n1) at (4,-3) [draw] {Regional\\Office};
+%	\node (l2n2) at (8,-3) [draw] {Other Work Unit\\of Head Office};
+%	\node[fill=yellow] (l2n3) at (12,-3) [draw] {Strategic Information\\Technology Group};
+%	\draw (node cs:name=l1n1,anchor=north) |- (5,1.5);
+%	\draw (node cs:name=l1n2,anchor=north)|- (5,1.5) -| (node cs:name=root,anchor=south);
+%	\draw (node cs:name=l2n1, anchor=north) |- (9,-1.5);
+%	\draw (node cs:name=l2n2, anchor=north) |- (9,-1.5);
+%	\draw (node cs:name=l2n3, anchor=north) |- (9,-1.5) -| (node cs:name=l1n2, anchor=south);
+%\end{tikzpicture}
+\caption{PT XYZ organization structure}
+\label{fig:fig331}
+\end{figure}
+
+\section{Current System}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{current_system.png}
+\caption{Current system}
+\label{fig:currsys}
+\end{figure}
+
+PT XYZ has 3 separate data center which are located in Indonesia. Each data center has two group servers, this is done as a fall back when one set of servers are down. Each data center can contain up to 48 virtualized web servers.
+
+Currently, a single instance of the web server can handle up to 300 concurrent socket connections in comfortable condition and 450 concurrent socket connections in safe condition. Under comfortable condition, the network may only run a single data center and still operate in normal condition. Under safe condition, the network will run into difficulties when only one data center is operational.
+
+The figure \ref{fig:currsys} shows the current architecture of PT XYZ Mobile Application architecture. The current system employ Global Site Selector (GSS) to select the best data center to process the connection in terms of the proximity and resource availability. A Load Balancer (LB) in every data center to balance the connection load onto each instance of web server. Web Server is the proxy gateway into internal PT XYZ system, handling message encryption, security token, user authentication, connection security, connection handling, and message decryption.
+The application server contains the application critical to the business process. The database server is used to store and retrieve data from the application server. All communication from the web server to the application server and database server uses HTTP request instead of the Socket.
+
+Each web server virtualization was given specification as follows:
+\begin{itemize}
+\itemsep0em
+\item OS: Solaris 11.3
+\item Processor: 9 core \@ SPARC-M7 4267 MHz
+\item Memory: 96 GB
+\end{itemize}
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=\linewidth]{data_traffic-1-2.png}
+%\caption{PT XYZ's mobile application data traffic}
+%\label{fig:datatraf}
+%\end{figure}
+
+\section{Problem Analysis}
+Based on an interview conducted with the vice president of mobile application unit team and assumption of the current implementation of socket programming of PT XYZ mobile application, there are two main problem outlined with the current system Socket implementation by the user:
+
+\subsection{Socket Inefficiency}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{inefficiency_1.png}
+\caption{Inefficiency resources}
+\label{fig:inefficiency}
+\end{figure}
+This occurs based on the assumption that each synchronous socket connection in the server is maintained on a thread to create a concurrent connection between each connected client and the server. Each thread is assigned a client to ensure that each client communication is processed in a timely manner in a synchronized environment.
+However, this resulted in the server must keep maintaining each socket connection in each thread under any condition. Thus, the times when communication between application and server cease but still connected could be counted as idling time on the thread, wasting server resources maintaining an idle connection.
+
+\subsection{Double Socket}
+Double Socket occurs when a Client attempt to connect PT XYZ network in good network condition suddenly losing connection when about to receive the secure token for connection, and prompted a retry which lead to an unsynchronized communication which lead two Double Socket as both mobile application and web server expecting different secure token for connection, preventing further communication until the mobile application is reinstalled.
+A step by step illustration of the Double Socket problem below:
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{double_socket_1.png}
+\caption{Client is sending a login token to server}
+\label{fig:double-socket1}
+\end{figure}
+At Figure \ref{fig:double-socket1}, when the data signal from client side is stable and strong, the client attempt to login to the server for the by sending the token to the server.
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{double_socket_2.png}
+\caption{Response from server delayed}
+\label{fig:double-socket2}
+\end{figure}
+
+At figure \ref{fig:double-socket2}, the server send a response to the client. Due to network condition which fails, the client is unable to receive the token at the expected time. 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{double_socket_3.png}
+\caption{Client re-sending token, and original response arrives}
+\label{fig:double-socket3}
+\end{figure}
+
+At figure \ref{fig:double-socket3}, the client timeouts and sends another login token to the server. After which, the first response arrives at the client device, which but an error occurred as there is a mismatch in the token exchanged.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{double_socket_4.png}
+\caption{Out of sync on both side}
+\label{fig:double-socket4}
+\end{figure}
+As a result, which can be seen in Figure \ref{fig:double-socket4}, server will not recognized the new token from the client. While the client is expecting the latest login token. 
+
+This problem is attributed to the current security measure in place which arose due to an unexpected lost or delay in network environment. The security measure is implemented to prevent client token hijack as long as the connection is active. The unexpected network condition which activate the security measure could be attributed to the lack of network state checks for both client and server. 
+
+\section{Proposed Solution}
+Both problem could be resolve by replacing the current model of Socket with a Broker and an MQTT protocol connection. In this model, we added a dedicated layer to handle the message reliability, asynchronous messaging, time to live in messages and in connections, and Transport Layer Security handling.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{proposed_system.png}
+\caption{New architecture of PT XYZ's mobile application network}
+\label{fig:solution}
+\end{figure}
+By separating the task to two different layer, the web server could dedicate more resources into token authentication, and message encryption and decryption; While the broker will manage all the communication between the client and the server to ensure all the message and session is handled in a secure and reliable manner. Thus, the issue in resource limitation on the web server instance due to the need to ensure a reliable message could be handle by a specialized application tier, leaving the web server to work as the bridge the mobile application and the server application.
+
+The issue of Double Socket is addressed in this implementation as the message, the quality of service, time to live, and last will and testament will ensure that a timely token and response will arrive to the destination under the sudden lost in mobile network. The message will be configured using Quality of Service level 2, send exactly once, which will ensure that a message is sent exactly once by initiating a four-way handshake: The message, a response on received message and response publish has been released, and a response to the response that the message that is sent is complete. 
+
+In the event of a disconnect, a last will and testament will ensure that the server knows what happen to the client and resets the token to prevent the double socket condition to last in the next attempt to connect. This is due to the last will and testament is stored in the broker for first time connection, and send a predefined message into a topic or multiple topics when the client disconnect and does not return at a predefined time. 
+
+
+\section{Application Scope}
+The scope of this application is to test a possible replacement for the current socket programming found in PT XYZ mobile application for networking with the back-end server. PT. XYZ is looking into MQTT, a network messaging protocol, as a replacement to the current Socket implementation for secure verification method. To test the viability of MQTT in comparison socket, PT. XYZ has assigned the task to create a simulated system consisted of a server, a broker, and a client.
+
+The goal of this assignment is to provide a proof of concept as to the capability, security, and efficiency in using MQTT, an asynchronous communication protocol, and compare that to a socket implementation.
+The server should be able to accept, process and deliver socket and MQTT messages and capable of connecting and maintaining a secure SSL/TLS connection. The programming language of the server is left to the assignee. The broker was recommended to use an open source and commonly adopted solution with capability of using secure SSL/TLS connection. And a client capable of using both MQTT and socket and SSL/TLS connection. The programming language of the client is left to the assignee.
+
+To implement this, we will need to build the following:
+\begin{enumerate}
+    \itemsep0em
+    \item A simple working mock server with a function to send and receive a message from  MQTT and Socket and log the various data. This server serves as a mock backend of PT. XYZ mobile application
+	\item A Socket connection adapter to send and receive a common communication protocol between client and server.
+    \item An MQTT message protocol connection adapter to send and receive MQTT Message coming and going to and from the server and client. All of which is to connect to the broker.
+	\item A broker to manage the session, topic and message queue for MQTT protocol. The goal of the broker is to ensure reliable message transfer between client and server.
+    \item Test application that implements MQTT and Socket Protocol. This is used to ensure a common size and common usage between both modes of communication. The goal of this test application is to mimic the communication between PT. XYZ mobile application and the backend server.
+\end{enumerate}
+
+\section{Roles}%TODO: there might be better outline than this. I don't know
+Our team consist of 3 persons. Even though we do internship at the same company, but we were placed in different team. In spite of that, we still manage to divide jobs for the thesis.
+
+\subsection{Roles in Company}
+Antonius George Sunggeriwan is placed in Mobile Banking team under Customer Touch Point Solution. His main job description in this team is to assist in exploration, development, and testing of the next generation of the company various application assigned under the team. The team handles various application on multiple platform and web services working with various vendors for use by the customer.
+
+Chrisando Eka Pramudhita is placed in the mainframe team. His main task is to help maintain the core mainframe system that empowers most of PT XYZ’s activities.  He helps in creating new programs to satisfy the growing need pf PT XYZ’s businesses as well as fixing bugs and extending the functionality of existing programs on the mainframe.
+
+Tiffany is placed in Data Warehouse team. Her main job desk in this team is to do the ETL procedure and do the data migration from old software to new software. She also support some senior staff's projects. Main tools that this team used are Oracle and SQL Developer. This team also used some of vendor's software and license software to help them developing their projects.
+
+\subsection{Roles in Thesis Project}
+Antonius George Sunggeriwan as System Analyst.
+His role in this project is to communicate with the user and gather the requirements of the project. He is tasked to understand and analyze the current and the test system to create an effective mock system.
+Chrisando Eka Pramudhita as IT Analyst.
+His role is to analyze the current system, create a mock system of the current system and the proposed system, and perform the testing and data gathering of the mock system.
+
+Tiffany as System Analyst.
+Her role in this project is to analyze the current system and the problems that occurred. She also analyze the data based on the mock system of the current system  and the proposed system.
+
+Despite of different roles, the whole member still have their contribution to writing this thesis.

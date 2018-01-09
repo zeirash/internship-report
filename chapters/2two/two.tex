@@ -1,0 +1,266 @@
+\chapter{THEORITICAL FOUNDATION}
+\section{Java}
+%Need More citation on history
+Java® is a general purpose, concurrent, object-oriented programming language. Developed by James Gosling, Patrick Naughton, Chris Warth, Mike Sheridan and Ed Frank under Sun Microsystems and released as Java in 1995. Originally conceived for the purpose of creating a platform-independent programming language to support multiple host architectures to address the problems of building software for networked consumer devices. Java® has a similar syntax and structure with C and C++ as Java® is built upon  C and C++ to add the capability to be able to run on multiple host architectures while removing the complexity, and unsafe nature of using C and C++.
+
+That Java® programming language is strongly and statically typed, each variable and constants will need to have a predefined data type that cannot be changed after the variables and constants been declared. Java® is a high-level language, the Java® programming language abstracts away the detail of the representation of the code on the machine. The Java®  compiler handles memory management using a garbage collector to ensure that programmers can avoid safety issues that may arise from memory management errors made by the programmers, such as forgetting to deallocate a block of memory after usage. Java also does not include unsafe constructs that can lead to an undefined behavior. \cite{java}
+
+Java programming language is strongly and statically typed, meaning that each variables and constants will need to have a predefined data type that can't be changed after it's declared. This features allows for the development of many static analysis tools by the community, such as error-prone by Google, used for catching common mistakes on Java on compile time. %Java type system also helps on building more complex refactoring tools. Such tools are significantly less reliable and harder to build on loosely typed programming languages such as Javascript.
+
+%The Java programming language is strongly and statically typed. This specification clearly distinguishes between the compile-time errors that can and must be detected at compile time, and those that occur at run time. Compile time normally consists of translating programs into a machine-independent byte code representation. Run-time activities include loading and linking of the classes needed to execute a program, optional machine code generation and dynamic optimization of the program, and actual program execution.
+
+Java is a high-level language, it abstracts away the detail of the representation of the code on the machine. It handles memory management using a garbage collector so that programmers can avoid safety issues that can arise from memory management mistakes made by the programmers, such as forgetting to de-allocate memory after use. Java also does not include unsafe constructs that can lead to some undefined behaviour. 
+\cite{java}
+
+\subsection{Java Virtual Machine}
+The Java® Virtual Machine is the core of the Java® platform. Java® Virtual Machine (JVM) is the component of the technology for Java® Virtual Machine's hardware and operating system independence, the small size of Java® compiled code, and the ability to protect users from running malicious programs.
+The Java® Virtual Machine is an abstract computing machine. Similar to a real computer, Java® Virtual Machine has an instruction set and manipulate multiple memory areas at run-time. Java® Virtual Machine is reasonable common to implement a programming language using a virtual machine.
+The first implementation of the Java® Virtual Machine was a prototype of the Java® Virtual Machine at Sun Microsystems, Inc., emulated the Java® Virtual Machine instruction set in software hosted by a hand-held device that is similar to a Personal Digital Assistant, the predecessor of a smartphone. Oracle's implementation emulates the Java® Virtual Machine on mobile, desktop and servers, but the Java® Virtual Machine does not assume any implementation technology, host hardware, or the host operating system. Java® Virtual Machine is not fundamentally interpreted, but can just be implemented by compiling the instruction set to a CPU. Java® Virtual Machine may also be implemented in microcode or in the CPU.
+
+The Java® Virtual Machine does not know anything about the Java® programming language, only a particular binary format, and class file format. A class file contains Java® Virtual Machine instructions and a symbol table along with other additional information.
+
+The Java® Virtual Machine forces a strong syntactic and structural constraints on the code in a class file. This allows any language that can express the functionality in terms of a valid class file can be hosted by the Java® Virtual Machine. This contributes to the popularity of implementing another language into a Java® Virtual Machine compatible language as Java® Virtual Machine allows for a programming language to be generally available, machine-independent platform and secure program delivery. \cite{java}
+
+\subsection{Kotlin}
+Kotlin is a statically-typed programming language that runs on the Java® Virtual Machine. Developed by JetBrains and revealed in 2011, Kotlin was made to provide better programming experience for programmers working on projects that are based on the JVM. It includes a lot features and ideas from other programming language that Java does not provide. The goal of this is to allow programmers to write a more concise and expressive code.
+
+One of the key features in Kotlin is its full interoperability with Java, as both runs on top of the JVM. Codes written in Kotlin will be able to call Java codes directly without any modification. This makes it easy for programmers to integrate new Kotlin codes into their Java-based codebases and use the modern features of Kotlin while staying with the familiar technology that they normally use.\cite{kotlin}
+
+%need more stuff, Teralu personal  dan quotasi, kurang cocok untuk riset. Butuh Data lebih lengkap nih
+%Kotlin has been adopted into the Android Studio for developing an Android application. Kotlin was developing to be a more concise, expressive and type-safe while maintaining the performance of Java. This allows for Kotlin code to be interoperable with Java code as both runs on top of the Java® Virtual Machine.
+
+\section{Network}
+Each turn of the century is marked by a revolution that defined the era. In the 18th century, mechanical systems from the spinning jenny to the steam pump that allowed the work from a few skilled crafters producing few expensive goods to many less-skilled laborers with a much larger volume at a much lower price, sparking the first industrial revolution. The 19th century was marked by a technical revolution, by refining the further industrial the process and understanding the method and forces at work, allows for the understanding to harness the power of electricity to be used for lights and communication. The 20th century is defined the era with a scientific revolution, a general and competitive nature of practicing the scientific theory and the race to understand the nature of the world allows for understanding the powerful nature of the universe or the atom with simple or understandable theory and equation allows for harnessing the power of nuclear energy and the electronic computer. As we progress, the 21st century will be marked with an information revolution: networked computer sharing information between one another, allowing for communication at a near instantaneous rate. \cite{TanenbaumBook}
+ 
+The emerging of network computers and their impact has a powerful influence on how systems are organized. The once popular concept of a mainframe, a room dedicated to house and ventilate large computers for a user to their task and for the computer to process, this is rendered obsolete for most user. The old system of a single computer holding all the computational power and share a "time" to the individual user of the single computer is obsolete, replaced with an interconnected computer with each able to process and their own task without the need to waiting for the turn. This new system is called a computer network.
+
+According to Peterson \cite{peterson2012computer}, at one time, the term \textbf{network} is defined as a set of serial line attached to terminals and connected to mainframe computers. To some, the term means the voice telephone network .To others, network or cable network is used to disseminate video signals. However, one thing these networks share the same common is they are only handling one particular kind of data and typically connect to special-purpose devices.%However, the term \textit{network} is now defined as 
+%TODO: define and cite the new term for computer network
+%. A new definition is needed to reflect the proliferation and new method of networking and communication between all the devices that ranged from special purpose devices, network-enabled devices, routing machine, and another computer connected together along with the previous server and mainframe. Each is capable of sending and receiving information to one another.
+
+The prevalence of computer networks, and why other types of the network also interface or strive to join with computer networks, is due to the generality of the network. Computer network is built primarily on top of general-purpose programmable hardware, while are not optimize for a single type of application such as making a phone call or delivering television signal without additional hardware or software,  they are able to carry as many different types of data and support wide range of application and hardware and software modules to achieve making a phone or delivering television signals. 
+
+Today, most people know the internet through the application that utilizes the world wide web: email, social media, video streaming, music streaming, message board, news feed and more. We interact with the internet as \textbf{users} of the network. The Internet users represent the largest group of people who interact with the internet in some way. Another group that makes up the internet is the developers, people who \textbf{create} applications that utilize the internet. Then there are those who \textbf{operate} or \textbf{manage} networks, ensuring the infrastructure of the internet are working and optimized. Then there are those who \textbf{design} and \textbf{build} the devices and protocols that collectively make up the Internet.
+
+\section{Protocols}
+An effective means of communication between two or more parties requires a standardized means of transferring information. This is true for beings that needed to share information between one another such as humans, animals, and computers. When a set of standardizing methods of transferring information is accepted as the norm, a protocol \cite{FallBook}.  Protocol, according to the New Oxford American Dictionary is ``The official procedure or system of rules governing affairs of state or diplomatic occasions.''
+
+Human use protocols in a variety of situation and environment with a common local language every day i.e. talking with friends, asking questions, and writing a letter. Computers also use protocols to provide a common way of interaction between other computers, and components of the computers. A protocol suite is a collection of protocol that is generally related to usage, function or other means.
+
+\paragraph{Protocol Hierarchies}
+According to Tanenbaum, A. \cite{TanenbaumBook}, a protocol is an agreed-upon method of communication in order to transfer information and proceed between the parties involved. Not adhering to the agreed upon or common protocol will make communication with the other parties difficult or impossible.
+
+A five-layer network is illustrated in Figure \ref{fig:fig231}. The different individual parts that make-up the different layers of the different device are called peers. Peers can be a process, a machine or a human. Peers communicate with each other by using an agreed-upon method, a standard protocol or a common language.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.75\textwidth]{figure231-layers-protocols-and-interfaces.png}
+\caption{Layers, protocols, and interfaces \protect\cite{TanenbaumBook}}
+\label{fig:fig231}
+\end{figure}
+
+No data or information is directly communicated from each layer to another layer on another device. Each layer must pass the data and handle information to the layer directly below the current layer until the last layer in the bottom is reached. Under the bottom layer is the physical link which the actual transfer of information for communication actually occurs.
+
+Between the two pair of the layer across one another is an interface. The interface ensures that the simplest operation and services of the lower layers are available for the upper layer to use when available. The main consideration of the network designers back when designing the protocol for a computer network is for a clean and clear interface between layer. This consideration ensures that each layer has a clearly defined group of function for the purpose of that layer. The result of the consideration allows for a reduction in the overhead to transfer information between layer. Another benefit of a clear and simple interface definition between each layer is the interoperability opportunity which the layers allows for a different protocol or implementation of the layer to be implemented and still be able to work with the other unchanged or changed layer without a problem. This is due to the only requirement to replace the current implementation is that the new implementation or protocol to offer the same set of service as the replaced layers to the corresponding layer above and below it with the same interface between the neighbouring layers. This allows for the protocol to change in without the lower or upper layer to notice the change. It is possible for another device to use a different implementation of the same protocol without loss of interoperability between both devices. 
+
+A set of layers and protocol for networking is called a network architecture. The specification of an architecture must contain the essential information to allow an implementer of the architecture to write a program or build a hardware for each layer in a network architecture to correctly obey the appropriate protocol. The details of the implementation or the specification of the interface is not a part of the architecture as they are hidden inside the machine and invisible from the outside. It is not necessary for the interface on all machine in a network to be equal when all machine can communicate with each other. A set of protocols used by a system with one protocol per layer is called a protocol stack.
+
+\paragraph{Design Issues for the Layers}
+The main design issue of making a network that operates correctly with a collection of unreliable components is reliability. In a stream of bits of a packet travel through the network that is received by the receiver, there is a chance that some of the bit in the packet stream may be damaged due to an electric noise, random signal, error in hardware, bugs in software, and more. 
+
+A method to tackle the handling of unreliable transmission of information in the bit of a packet stream is by finding error with software. Data that is received incorrectly will be sent back to the source until a complete and error-free stream is received. A more powerful software may attempt at error correction, whereby the message is recovered from the incorrect bits that were originally received in the stream. Both methods worked by adding redundant information into the message. These are used in low layers to protect the packets sent over individual links, and in high layers to check that the message is correctly received.
+
+Another reliability issue in designing for the layers is finding a reliable working path through a network from the source to the destination. Multiple paths between a source and destination may exist and in a large network, there may be link and router that are broken in the path. As such routing created. Routing is used when a network must make a decision when a failure and must redirect route to another path. An example is when a packet is sent from location A to C thru location B with an alternate thru D but a network failure occurs in location B, packets that are sent that travel thru the location B must be redirected to use D instead of travelling across B.
+
+A second design issue is the evolution of network over time. Networks grow larger and newer design emerge and integrate with the existing network over time. There are other methods to deal with, but one of the solutions is by layering, similar to protocol layering. Each computer in each layer in a computer network needs an identification mechanism for both sending and receiving of a message. This is done by naming the computer in the high layers or addressing the computers in the low layers.
+
+A third design issue is resource allocation in the network. The network provides a service by using its underlying resources, such as transmission lines, to hosts of the network. A mechanism is in place to divide the network resources between the hosts to ensure that each host does not interfere with one another too much. Many network design share bandwidths dynamically, according to the current needs of the hosts, in contrast to giving each host a fixed about of fraction of bandwidth that the host can use. This is network design is called statistical multiplexing, which means sharing resources based on the demand statistics of the hosts in the network. This network design could be applied at low layers for a single link, or at high layers for a network, or applications that uses the network and requires considerable resources. 
+
+A resource allocation problem occurs at every level of layers is how to ensure that fast does not bottleneck a slow receiver with data. Feedback from the receiver to the sender is used to alert the sender about the current status of the receiver. This subject is called flow control. This problem often occurs when the network is oversubscribed due to many computers want to send traffic and the network unable to facilitate all the delivery from the senders. This overloading of the network is called a congestion. One method to deal with the congestion is for each computer to reduce its demand when the network experiences a congestion. This method can be used to ease congestion on each layer of the network.
+
+\subsection{TCP/IP}
+Transmission Control Protocol/Internet Protocol, or TCP/IP is a protocol suite that originates from ARPANET Reference Model to implements the internet architecture. The ARPANET Reference Model was influenced by early packet switching model by a group of researchers from United States of America, United Kingdom, and France consisted of Paul Baran, Leonard Kleinrock, Donald Davies and Louis Pouzin. TCP/IP proven to be the most popular protocol architecture despite other protocol architectures has been specified over the years.
+
+The TCP/IP protocol suite allows for devices ranging from servers, computers, and smartphones with parts and components from different vendors and manufacturers running different software, to communicate with each other with the same protocol. By the 21st century, TCP/IP has become essential protocol suite for communication, entertainment, and commerce. TCP/IP is an open system in that the protocol suite and many of its implementation are available with little to no charge. TCP/IP forms the foundation of the internet \cite{FallBook}.
+
+\paragraph{Structure of the Protocol Suite}
+TCP/IP protocol suite, according to Krzysztof Iniewski \cite{KrzyzstofBook}, uses a four-layered structure based on a simplified seven-layered structure in OSI (Open Systems Interconnection) stack. The reduction in the number of the layer from seven to four by combining and abstracting the higher layers of the OSI stack into one layer called application layer. The TCP/IP is arranged in layer shown in Figure \ref{fig:fig232}. The roles and responsibility of each layer of the TCP/IP stack from bottom to top are: 
+\begin{enumerate}
+\itemsep0em
+\item Link layer
+
+The main responsibility of this layer is to transfer packets from one node to another node over a direct connection. The link layer includes the physical means to signalling electrical or optical devices that drive the physical link,  definition of the data formats used on the link, the definition of the TCP/IP protocol signalling and state transitions for link control, the hardware that controls the link [usually referred as a network interface controller card], and the operating system component and device drivers that connects with the network interface card. Ethernet is an example of a link layer.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figure232-four-layer-protocol-stack-of-the-tcpip-suite.png}
+\caption{Four layer protocol stack of the TCP/IP suite \protect\cite{KrzyzstofBook}}
+\label{fig:fig232}
+\end{figure}
+
+\item Network layer
+
+The main responsibility of this layer is to transfer packets across the network from the source to destination. The network layer contains elements of the protocol such as header format, signaling, and endpoint state transitions which are used to move packets through the network, from endpoint through many internal nodes to the other endpoint. The TCP/IP network layer provides a primitive and unreliable datagram service; whereby both endpoints of the source and destination do not know how the packets move through the network or attempt to maintain a quality of service for the connection. Instead, the datagram service makes an effort to send each datagram correctly given by the transport layer as best as the datagram service could. 
+
+\item Transport layer
+
+The main responsibility of this layer is to establish and manage the end to end connection and communication flow to provide a quality of service. The transport layer controls the movement of data between both endpoints. This is done by a specific layer of the protocol, which contains header format definition, signalling between two endpoints, and state transitions for the endpoint. The transport layer sees the path provided by the network layer as an abstract pipe through a network to send data. The transport also has two other primary responsibility: provide a reliable quality of service over an unreliable network layer, and regulate the flow of information between the two endpoints over the pipe to maximize the throughput and minimize the congestion and packet loss in the pipe.
+
+\item Application layer
+
+The application layer contains all and any software the uses the transport, network and link layers to achieve end to end and process to process communication between both endpoints to support some of the users of the application layer purpose. The widely known application layer application is File Transfer Protocol for moving data from one endpoint to another endpoint, Telnet for remote login, and Simple Mail Transfer Protocol for email services. Web browsers are an application that supports a wide range of web services that depended on the range of application layer protocols such as HTTP and SSH.
+\end{enumerate}
+As user data passed from the application layer down the protocol stack to the link layer, each protocol layer adds information in the form of new headers appended at the beginning to the user's data. This incremental accretion of control information is illustrated in Figure \ref{fig:fig233}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figure233-progressive-addition-of-protocol-headers-and-trailers.png}
+\caption{Progressive addition of protocol headers and trailers \protect\cite{KrzyzstofBook}}
+\label{fig:fig233}
+\end{figure}
+
+At the top of Figure \ref{fig:fig233}, assume that an application needs to transfer 32 bytes of data via a TCP/IP protocol stack over an Ethernet link layer. The application layer added its own layer at the beginning of the data, in this case, an 8-byte header which carries an indication of the data type and the length and some control information to indicate what is to be done with the application data. The application layer hands the 40 bytes of data which is consisted of the 8 bytes from the application layer header and the 32 bytes of the application data to the transport layer.
+
+The TCP of the transport layer typically adds a 20-byte header. The 60 bytes consisted of the 20 bytes of TCP header, the 8 bytes of the application layer and the 32 bytes of the application data referred to as TCP Segment. The TCP hands the TCP segment to the IP layer, as the TCP depended on the IP layer to provide end to end transport. The IP layer adds another 20 bytes of header to the 60 bytes of the TCP header, application header, and application. The total 80 bytes is referred to as an IP segment. In this example, IP is depended on the Ethernet to provide the link layer services. Thus, the IP layer hands the IP segment to the Ethernet software which adds an Ethernet header and trailer before transmitting the complete Ethernet segment over the physical link.
+
+All four layers of the TCP/IP protocol stack are typically implemented in the software, as their behaviours are too complicated to be implemented directly in hardware. Software running on the appropriate hardware is capable of completing the various function in an appropriate manner. The application layer is usually a user process the remaining layers such as Transport, Network, and Link layers, are typically system processes in an operating system or device drivers.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{figure234-file-transfer-application-using-the-tcpip-protocol-suite.png}
+\caption{File transfer application using the TCP/IP protocol suite \protect\cite{KrzyzstofBook}}
+\label{fig:fig234}
+\end{figure}
+
+Figure \ref{fig:fig234} shows an alternative view of the TCP/IP protocol Stack. On the left of the figure, the four-layer protocol stack consumes some of the user files passed to the stack by the FTP application, which passes the file to the TCP network layer, then to the IP transport layer than to the Ethernet link layer. At the right of the figure, the stream of information is rising from the Ethernet link layer to the IP transport layer to the TCP network layer to the FTP application and to the user, as a copy of the previous user's file. Thus, the layered protocol implemented as tracks of processing blocks, carrying the file as a stream of packets or segments.
+
+Notice that direct communications between the left and right layers.  Each pair of the protocol layer implementation has a defined relationship with another protocol layer at the same level at the other end of the connection. Hence, the two FTP application appears to one another as if they share a logical FTP protocol in which they transfer a file from the left protocol stack to the right protocol stack. However, while the two FTP application appears to be using the FTP protocol, they actually send each other messages by engaging to the services provided by the TCP network layer. Thus,  the two FTP application has a logical and service relationship, the former with their application layer correspondence, the latter is with their transport layer service module.
+
+A related relationship exists between the two transport layers. In this circumstance, both transport layers receive requests from their application layer, but both stacks share a logical TCP protocol with their layer peer and a service relationship with the IP network layer which is below the TCP Transport layer. The IP is depended on the link layer in the same way as the IP achieve the request of the IP layer entities. The data flow arrows in(label) flow from the user file on the left layer to the copy of the file on the right layer. This shows that the direction that the user data move but does not mirror the full circumstance. This is due to most protocol layers requires a duplex communication pattern to move the user's file to another endpoint successfully and reliably.
+
+\subsection{SSL/TLS}
+The Secure Socket Layer/Transport Layer Security protocol was originally developed by Netscape and in 1994 for an encrypted data path between client and server that was operating system agnostic. However, the first version of Secure Socket Layer was not released due to a number of security flaws, a second version of Secure socket Layer was later released in 1995. However, the second version still consisted of a number of security flaws. Secure Socket Layer has not received a wide adoption until 1996 when a third revision of Secure Socket Layer that the Internet Engineering Task Force formally adopt Secure Socket Layer Version 3.0 and advocate for the protocol to be an industry standard.
+
+The Secure Socket Layer, when implemented correctly, will encrypt the communication between two endpoints. A third party observer could only infer the connection on the end points, not overseeing or modifying the information in the communication. Allowing for private interaction between parties such as authentication without fear of being monitored and impersonated, and conducting financial transaction without being spied on by a third party. To achieve this, the Secure Socket Layer protocol is implemented on the application layer, above TCP (\ref{fig:tlsfig1}), allowing other protocols such as HTTP, FTP, and SMTP, to continue to function without changes across the network while providing a secure communication foundation for the protocols such as the above.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{tls-fig1.png}
+\caption{Transport Layer Security/TLS \protect\cite{TLS}}
+\label{fig:tlsfig1}
+\end{figure}
+
+SSL 2.0 was the first publicly released version of the protocol, but it was quickly replaced by SSL 3.0 due to a number of discovered security flaws. Because the SSL protocol was proprietary to Netscape, the IETF (Internet Engineering Task Force) formed an effort to standardize the protocol, resulting in RFC 2246, which was published in January 1999 and became known as TLS 1.0. Since then, the IETF has continued iterating on the protocol to address security flaws, as well as to extend its capabilities: TLS 1.1 (RFC 2246) was published in April 2006, TLS 1.2 (RFC 5246) in August 2008, and work is now underway to define TLS 1.3.
+
+TLS Handshake
+To establish a Transport Layer Security connection, a handshake occurs between the connection peers whereby negotiation and agreement is made on which the cipher suites and the keys used to encrypt the data will be used in the connection (\ref{fig:tlsfig2}). The Transport Layer Security protocols specifies a procedure for the handshake to occur. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{tls-fig2.png}
+\caption{TLS handshake protocol \protect\cite{TLS}}
+\label{fig:tlsfig2}
+\end{figure}
+
+\begin{enumerate}
+\itemsep0em
+\item Transport Layer Security runs over Transmission Control Protocol to the peers and back, performing a complete round trip on all the endpoints that wished to connect with Transport Layer Security protocol.
+
+\item With the Transmission Control Protocol connection in place, the client sends the client owns Transport Layer Security specification to the server in plain text. The specification includes: the current implemented version of Transport Layer Security protocol,  a list of cipher suites supported by the client, and possible Transport Layer Security options.
+
+\item The server selects the Transport Layer Security protocol for communication, decides on the cipher suite to use from the list provided by the client, attaches the server certificate to prove the server owns authenticity, and sends the response back to the client in plain text. The server can also send a request for the client's certificate to prove the client's authenticity, and parameters for other Transport Layer Security extensions.
+
+\item In the event both sides are able to agree on a common Transport Layer Security version and cipher, and both the client and server are satisfied with the certificates. The client initiates a Rivest-Shamir-Adleman (RSA) or a Diffie-Hellman key exchange, which is used to establish the symmetric key for the current session. 
+% if possible, explain when failure to negotiate occurs in step 4
+\item The server processes the key exchange parameters sent by the clients. The server checks the message integrity by verifying the Media Access Control (MAC) address of the client message and returns an encrypted finished message to the client. The encryption is based on the agreed upon cipher and the Transport Layer Security version.
+
+\item The client decrypts the message based on the agreed upon cipher and the Transport Layer Security version with the negotiated symmetric key.  The client verifies the MAC address, and if all is verified true, then an encrypted tunnel is established. Further communication will be sent through the Transport Layer Security connection.
+\cite{TLS}
+\end{enumerate}
+
+Transport Layer Security protocol are capable to use either Rivest-Shamir-Adleman (RSA) or a Diffie-Hellman for key exchange mechanism. Both method offers a secure way of exchanging keys but differs on how to handle the key.
+
+%figure of RSA key exchange mechanism may help here
+%RSA is the most common key exchange mechanism in most Transport Layer Security deployment. 
+The RSA key exchange mechanism involves the client generating a symmetric private key, encrypts the key with the server public key, and sends the encrypted key to the server to be used as the symmetric key for the session, the server decrypts the encrypted key from the client, and the key exchange is complete. RSA is the preferred method due to only requiring a single key to be generated once for each party. However, this requires the RSA private key to be protected to prevent an attacker being to decrypt the communication between the client and server.
+
+%Figure of DH key exchange mechanism here may help
+%please help here
+
+
+Diffie-Hellman key exchange mechanism is an alternative to the RSA mechanism. Diffie-Hellman involves both client and server first to generate or retrieve their private key and negotiate a shared public key, the client and the server encrypts the common shared public key with each of their own private key, and after exchanging the encrypted shared public key with the other party’s private key, the recipient of each encrypted share public key encrypts it with their own private key. The result is the final common secret between server and client. Diffie-Hellman key exchange mechanism allows each key to be ephemeral and capable of perfect forward secrecy. The ephemeral nature of Diffie-Hellman key exchange mechanism allows each common secret changed easily without the need to regenerate the whole key. The perfect forward secrecy allows for a measure of security in which previous security compromise of the private key or the session key does not harm future session. While Diffie-Hellman key exchange is much more capable and secure, this requires more computation on both client and server. This produces latency in connecting to a server and uses CPU processing power for generating the session key.
+%TODO: too little, add more theory
+\subsection{Socket}
+% https://pdfs.semanticscholar.org/9ef9/c58042b19d44b428803a5a6c82ecb91b85ca.pdf
+Socket is an interface for sending and receiving data between applications and the network using Internet Protocol. Allowing application to communicate with other application over a shared network. Application create and defines the Socket, the type of Socket, and the method of communication using Socket. The method of communication could be using a Transport Control Protocol or a User Datagram Protocol
+
+\subsection{MQTT}
+Message Queue Telemetry Transport, or MQTT, is an open protocol originally developed by MQTT was invented by Dr. Andy Stanford-Clark of IBM, and Arlen Nipper of Arcom in 1999 and subsequently developed by IBM and released to the public royalty-free in 2013 with the protocol 3.1. MQTT was original to have a common protocol for minimal battery loss and minimal bandwidth connecting oil pipelines over a satellite connection. A condition where the protocol is needed to be simple to implement on various of device, provide a quality of service data delivery to minimize missing data, lightweight for resource-constrained embedded device, bandwidth efficient for network constrained environment, data agnostic to be able to transport any kind of data type, and continuous session awareness to ensure device connectivity and status\cite{mqtt}.
+
+The latest revision of MQTT is version 3.1.1 and has become an OASIS standard with a designated port of 1883 for unsecured connection and 8883 for secured connection.
+
+MQTT consists of one broker server and one client. A client can be a publisher or a subscriber or both depending on the configuration or the role needed. Publisher client can send a message to a topic in the broker. Subscriber client can receive a new message sent by a publisher client from the topic which the subscriber client has subscribed to. The broker server act as an intermediary between multiple clients for the client to manage and store the sessions of the clients, the topic that all the client is subscribed or published to, and the message that is queued and ensured for delivery to the offline client when the client is available to receive the message. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figuremqtt2-MQTT-Message-Transmission-Process.png}
+\caption{MQTT Message Transmission Process \protect\cite{mqtt}}
+\label{fig:mqtt2}
+\end{figure}
+
+A typical flow of message using MQTT protocol can show in the above figure. The message is published into a topic from the publisher client. The message travels to the broker and into the topic queue. The broker then checks if the subscriber is in the topic and send the message to the subscribing subscriber client. The subscriber client of the topic receives the message from the broker. The subscribing client maintains connection to the broker to be notified when a new message is published into the topic.
+
+MQTT is widely known in the internet of things devices and has become a common standard for devices with the SensorThings API by the Open Geospatial Consortium adoption for a common application programming interface for sharing internet-connected sensors with a project such Smart Emission Project 2016 and 2017. MQTT is also known to replace notification service to provide a unified way to push notification to connected services, this used by pushy.me, a notification service company for multiple platforms, for delivering an encrypted and interactive notification service in milliseconds instead of seconds when compared to the proprietary solution on platforms that are not IOS. And Application such as Facebook Messenger which is known to use MQTT to speed up Facebook Messenger pipeline to enable communication delivery in the milliseconds, faster than any competitor in the early days of Facebook Messenger.
+
+
+\paragraph{Topics}
+Topic is the communication channel between clients of the broker. Each topic may cater to one or more clients communicating between each other facilitating case sensitive topic names with any of the UTF-8 character, and at most 65535 byte. A topic may not start \$ as that is reserved for the broker's metrics including: up time, throughput, and average message size. An example of topic usage below.
+
+Device "B" is a publisher and device "A" is the subscriber. Device "A" subscribes to topic "Messages". When device "B" publish a message to a topic other than "Messages", device "A" will not receive the message that device "B" publishes.
+
+Topic may be separated into different levels within the topic names to provide structure and detail in subscribing and publishing. The forward slash ('/' U+002F) is used to separate each level of the topic hierarchy. The most common naming convention is going from general to detailed with each slash separating the level, example: "Sport/Football/League/Premier/Club/Manchester United/Player/2015/Wayne Rooney". This allows topic to be easily traverse and organized.
+
+Topic may be subscribed individually, or using a wild card to subscribe to many topic at once. This allows for scalability without having to configure each new subscription. Using wild card to subscribe is not recommended in a common practice. This is due to the nature of wild card will return all of the message that is subscribed, as defined by the type of wild card used in the subscription.
+
+The plus sign ('+' U+002B) is a wild card character that accept any of the current, and filters the subscription with the higher and lower levels. An example of the plus sign ('+' U+002B) is "Sport/Football/League/Premier/Club/+ /Player/2015", all the football club with players in premier league in 2015 is subscribed. This is used to subscribe to a single tier, with filter from the higher and lower tiers. The plus sign wild card is used to subscribe laterally in a topic hierarchy.
+
+The number sign ('\#' U+0023) is a wild card character that accept any of the current and any lower levels, and filters the subscription with the higher levels. An example of the number sign ('\#' U+0023)  is "Sport/Football/League/Premier/Club/Chelsea/Player/\#", all the players in Chelsea football club is subscribed. This is often used for mass subscription, subscribing a large number of topics at once. Although not recommended for normal usage, the number sign wild card is often used for logging or data collection for traffic passing through the broker, as the wild card subscribes to any lower tier in a topic hierarchy.
+
+\paragraph{Quality of Services}
+MQTT uses Quality of Services to ensure reliability in messaging. MQTT support three level of Quality of Service (QoS). Figure \ref{fig:mqtt1} demonstrate the measures in packet exchange according to the three different Quality of Service levels.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figuremqtt1-Packet-transmission-method-about-QoS-Level.png}
+\caption{Packet transmission method about QoS Level \protect\cite{mqtt}}
+\label{fig:mqtt1}
+\end{figure}
+
+Quality of Service level 0 sends a message only once. Following the message distribution flow, and does not check whether the message arrived at the destination or not. Thus, Quality of Service level 0 is susceptible to a complete message loss when the condition is not ideal. Quality of Service level 0 is often used in non-critical sensors where the minor loss in communication to keep the cost or the processing capability or battery power of the sensors deployed in the field.
+
+Quality of Service level 1 sends the message at least once. Following the message distribution flow, and return a PUBACK (Publish Acknowledgement) to confirm that the message has arrived and stops sending the message. This Quality of Service may give duplicate messages due to PUBACK is lost or the packet in flight is longer than expected and the publisher sends another message. Quality of Service level 1 is used for sensors that are more critical or have more leeway to send information as the information is not lost in the message and the message is delivered, regardless whether the message is a duplicate or not.
+
+Quality of Service level 2  sends the message exactly once. Following the message distribution, and return a PUBREC (Published Received) message and sends a PUBREL (Publish Release) message to the sender, the sender after receiving the PUBREC and PUBREL sends a PUBCOMP (Publish Complete) message to complete the 4-way message handshake. This Quality of Service is the most resource, slowest, and bandwidth intensive Quality of Service in the option. This Quality of Service is also the safest option to send an important message only once. This could be utilized for a billing system whereby a duplicate or a loss of message may give an incorrect amount.
+
+The higher Quality of Service level, the more packets will be exchanged. This is done to reducing the chances of any message loss, at a cost of the increased resource, bandwidth, and latency of the message. An effective levelling between critical and non-critical switching between message publish may correlate to the best service quality while retaining the low network and resource usage. 
+
+\section{Testing}
+\subsection{Locust}
+%TODO: please paraphrase and cite link website below
+%http://jmeter.apache.org/index.html
+Locust is an open source load testing tool written in python, designed to load test functional program and measure it's performance. Locust can be used to test the performance on static, dynamic Web application resources. Locust is also capable of simulating heavy traffic and load on a server, cluster of servers, network or object to measure the capability and overall performance under various stress types. It can scale to multiple machines and delivers millions of simultaneous users to load a system.
+
+Locust tests are written fully on python, unlike some of it's competitors that uses GUIs to create test. All that is needed to be learned to write tests are Python programming and locust's API, no need to learn how to use a new interface or application.
+
+Locust was originally designed for HTTP as it's main target, but it also provides an event triggers that let's anyone to create a custom client that can targets many different system. Included but not limited to: PHP, NodeJS, REST Web services, Database, basically anything that can interface with Python. 
+
+To test a system using locust, we must first define a locustfile where we define the code that will be used for loa testing the system. This locustfile will contain a locust class which represent a single locust client. Each of the locust class will have a task\_set attribute that will point to a TaskSet class which is a collection of task that each of the locust client will execute randomly with random interval of time. The range of possible random interval of time is chosen between the min\_wait and max\_wait attribute on the Locust class. 
+
+\cite{locustDoc}
+
+\subsection{Phyton}
+Python is a high-level programming language that was developed by Guido van Rossum in 1989, and was first announced to the public in 1991. Python is an interpreted language that runs on many different platforms. Python uses dynamic typing, which means that types are assigned to a variable automatically according to what the value the programmer assigned to the variable, although since version 3.5 python also supports type hints for static typing. Python provides many interfaces to system calls and libraries, it is also extensible in C and C++. It also can be used as an extension for other application that needed a programming interface, all of this makes python very versatile and able to interface with many different types of systems. \cite{phytonFAQ}
+
+One of python's design goal is extensibility, it was first created as a language for people who write C programs but have works where writing C programs was just not effective. Because of this, Guido van Rossum made it possible for people to write python modules purely in C, in order to provide extensibility to C programmers. This decision, to make python extensible makes it possible for many people to write their own module and allow python to interface with many systems. \cite{phytonDesignGoals}
+
+Python borrows heavily from ABC programming language, a language that was designed to be easy to be learned by people who were not programmers, this influence leads to many design decision in python such as the use of indentation to separate code block. This has made python into a language that is easy to read and friendly for beginners. \cite{makingOfPhyton}

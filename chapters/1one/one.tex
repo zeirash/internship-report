@@ -1,0 +1,81 @@
+\chapter{FOREWORD}
+\section{Background}
+Indonesia is home to 237,641,334~\cite{CensusData} individual with an approximate 37.5\% smartphone penetration numbering at around 103 million~\cite{Statista} mobile user and expected to rise higher with the Palapa Ring Project, a telecommunication infrastructure project, is expected to be completed at the end of 2018\cite{PWCinfra}. This investment will increase network availability to remote villages in Indonesia. 
+
+PT XYZ implementation of Socket uses the synchronous method of communication. Synchronous communication is a communication method between program whereby sender and receiver send and receive information in a stream of packets~\cite{techdifferencesSyncVSAsync}. Synchronous method of communication is well suited for a real-time application or in desktop environments such as file transfer or video conferencing. The weakness of synchronous method of communication is putting a burden on keeping connection as well as undamaged communication from the other side while both sides are idle. This idle connection wastes the server and client resources as it forces the server and client to have a stable connection while no data is transferred. In practice, the connection may suffer a loss due to a number of reasons. Thus, both client and server must keep re-establishing communication with the proper mechanism which will impact the client performance. In case of failure, a Synchronous method of communication may return an error due to a sudden stream lost. Thus a file integrity checking and error handling are required to be implemented.
+
+PT XYZ is looking into a more lightweight and asynchronous connection protocol to better cover the restricted network coverage condition on a remote area in Indonesia. One of the candidates to replace Socket is Message Queue Telemetry Transport. Message Queue Telemetry Transport, or MQTT, is a protocol for message transport with a publish/subscribe model for devices in a constrained environment, including but not limited to: low memory, low storage, hostile network connection, and low CPU capability. MQTT is capable operating in both asynchronous and synchronous fashion. The protocol has a widespread adoption, especially on the Internet of Things devices. MQTT often described as Many-to-Many communication, this is due to the ability to send many messages to many receivers as well as receive many messages from any sender. 
+
+MQTT communication uses a Client and Broker setup. A client is any device that can be a producer, publish message into topics, or a consumer, receive published message from the producer. A Broker: a middle management that manages the connection and queue of a message between topics. The broker is responsible for client identity and ensuring message arrives at the topic subscriber and guiding the subscriber to the required topic. The broker also responsible to alter the message protocol from the incoming and the outgoing to other messaging protocol such as to OpenWire, AMQP, and STOMP.
+
+MQTT messaging protocol requires a Topic, an ID, and the message. A topic is an agreed upon place to communicate between clients. The topic can be further segmented using a slash symbol to indicate the level and such the detail of the communication. Subscribing and publishing a topic may contain wildcards such as asterisk, hash and plus symbol, this is used for broad publication and mass subscription and used when. An ID is a unique identifier of the subscriber. This is used to ensure that the message of each topic subscriber receives the message from the publisher. A message is an information or data that travels thru the MQTT messaging protocol. The MQTT messaging protocol is agnostic over the data, as such, MQTT allows for any data, information, file to go thru the messaging protocol, provided they could be turned into a byte array. This behaviour allows MQTT to pass JSON, image, audio, video or HTML.
+
+MQTT is a higher layer protocol, capable of running over Socket and REST as MQTT is a messaging protocol over TCP/IP and thus HTTP protocol is supported. This allows for direct connection, without a broker, where information could be transmitted in Socket or REST if required. As such, the broker less implementation is used to further reduce the overhead of running an MQTT messaging system at a cost of no reliability of message arriving at the destination. This is achieved when changing the broker instead acting as a middleman that manages the connection, message queue,  to a directory where it will point the message to the destination.
+
+MQTT has been adopted for Facebook Messenger for Phone-to-Phone deliver and Open Geospatial Consortium as the standard for SensorThings API, with support from Microsoft Azure for telemetry and Amazon IoT, a web service using MQTT\@.
+
+\section{Issues Raised}
+The weakness of Socket protocol is using a synchronous method of communication which is an unsuitable mode of operation in a hostile network environment, where the connectivity and bandwidth are unreliable and restricted, as the connection must be kept alive by enforcing a strong and stable connection while no data is being transferred in the period of time. Idling connection takes resource for both client and server whether or not the client or server is ready to send a stream of data to the other side. In case of a connection lost, communication must be re-established as well as re-sending a complete stream of data in transfer. A file integrity and error handling must be created to detect and address an error in a stream in the client and server.
+
+\section{Application Scope}
+The goal of this assignment is to provide a proof of concept as to the capability, security, and efficiency in using an asynchronous  Message Queue Telemetry Transport protocol as a replacement to a comparable synchronous Socket programming for a secure verification.
+In order to create a comparable sample of the current PT. XYZ Mobile Application Verification system, we are required to create:
+\begin{enumerate}
+    \itemsep0em
+    \item A simple working mock server with a function to send and receive a message from  MQTT and Socket and log the various data. 
+	\item A Socket connection adapter to send and receive a common communication protocol between client and server.
+    \item An MQTT message protocol connection adapter to send and receive MQTT Message coming and going to and from the server and client. 
+	\item A broker to manage the session, topic and message queue for MQTT protocol. The goal of the broker is to ensure reliable message transfer between client and server.
+    \item A test application that implements MQTT and Socket Protocol. 
+\end{enumerate}
+The important metric for the performance of both MQTT and Socket are as follows:
+\begin{enumerate}
+	\itemsep0em
+    \item Packet Transfer Latency
+    \item Overall Packet Size
+    \item Peak Connection Handling
+    \item Connection Lost Handling
+    \item Packet Lost Handling
+    \item CPU and Memory usage for server, broker, and mobile application
+\end{enumerate}
+
+\section{Goal and Benefits}
+\subsection{Goals}
+\begin{itemize}
+	\itemsep0em
+    \item Prevent out of synchronization token due to unreliable network condition
+    \item Increased performance in restricted network condition
+    \item Improve reliability in restricted network condition
+\end{itemize}
+\subsection{Benefits}
+\begin{itemize}
+	\itemsep0em
+    \item Assured message delivery
+    \item Efficient task management on the Broker and Server
+    \item Lower bandwidth usage
+\end{itemize}
+
+\section{Research methodology}
+Methodologies that were used for this thesis are:
+\paragraph{Material research}
+Gathering materials related to the thesis from books, articles, official documentation and other sources. The goal is to understand the underlying system that we use, its weakness and advantage over other technologies, and other people's experiences in using the technologies that we use so that we'll know what to expect from it and what test for.
+\paragraph{Design and planning}
+Design how the application communicates with the server using each protocol that will be tested and plan how to test it.
+\paragraph{Testing and implementation}
+Implement the new protocol concept and the currently used protocol that has been running. Testing each messaging protocols according to the testing scheme. Collect data from each protocol testing results.
+\paragraph{Data analysis}
+Compare and analyze gathered data from the testing results. This is done to understand the performance metric of each protocol and to draw the conclusion from it.
+
+\section{Writing System}
+The arrangement of this thesis consists of 5 chapters as follow:
+\paragraph{CHAPTER 1: INTRODUCTION}
+This chapter describes the background of the thesis. It's motivations, objectives, benefits, and methodology. This chapter serves to give a basic overview of the whole thesis.
+\paragraph{CHAPTER 2: THEORETICAL FOUNDATION}
+This chapter contains definitions and explanations of the terms and theories that are used in the thesis to support the use case of MQTT on PT. XYZ's mobile infrastructure.
+\paragraph{CHAPTER 3: METHODOLOGY OF RESEARCH}
+Here we will discuss the brief description of the company's history, the technology used on the current system, and the problems that it currently faces, and how MQTT can solve some of it.
+%TODO: coba di review lg bagian ini
+\paragraph{CHAPTER 4: RESULT AND DISCUSSION}
+This chapter contains a detailed explanation of how the MQTT implementation looked like, and how much it improved the current system according to the data that has been collected.
+\paragraph{CHAPTER 5: CONCLUSION AND SUGGESTION}
+This chapter finishes off by drawing conclusion and suggestion from the data and findings that were described on all of the previous chapters
