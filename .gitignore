@@ -2,7 +2,9 @@
 .idea/
 *.bbl
 *.blg
+*.bcf
 *.log
+*.lot
 *.pdf
 *.aux
 *.dvi
@@ -10,8 +12,10 @@
 *.synctex
 *.toc
 *.lof
+*.run.xml
 index.fdb_latexmk
 index.fls
 index.dvi
 .DS_STORE
 _minted-index/
+*-backup/
