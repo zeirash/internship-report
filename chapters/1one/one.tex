@@ -25,4 +25,25 @@ Company's Mission:
 \section{Student Positions and Roles}
 On internship program this odd semester, the author got assigned at Strategic Information Technology Group (GSIT) division, Data Management (DTM) work unit, Datawarehouse (DWH) team. The author was asked to assisting some of other collage's projects, and primary asked to help with data migration.
 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+	\tikzset{every node/.style=
+        {thick, draw=black, align=center, minimum height=50pt, minimum width=100pt}
+     }
+	\node (root) at (5,3) [draw] {General Meeting\\of Shareholders};
+	\node (l1n1) at (2,0) [draw] {Commissioners\\Board};
+	\node (l1n2) at (8,0) [draw] {Directors};
+	\node (l2n1) at (4,-3) [draw] {Regional\\Office};
+	\node (l2n2) at (8,-3) [draw] {Other Work Unit\\of Head Office};
+	\node[fill=yellow] (l2n3) at (12,-3) [draw] {Strategic Information\\Technology Group};
+	\draw (node cs:name=l1n1,anchor=north) |- (5,1.5);
+	\draw (node cs:name=l1n2,anchor=north)|- (5,1.5) -| (node cs:name=root,anchor=south);
+	\draw (node cs:name=l2n1, anchor=north) |- (9,-1.5);
+	\draw (node cs:name=l2n2, anchor=north) |- (9,-1.5);
+	\draw (node cs:name=l2n3, anchor=north) |- (9,-1.5) -| (node cs:name=l1n2, anchor=south);
+\end{tikzpicture}
+\caption{BCA's organization structure}
+\end{figure}
+
 This year and last year, migration data became the priority in this team. Because the server of ETL old program that were use for ETL jobs were going to be shut down soon. So, the author's daily job was to migrate the jobs of ETL to the new ETL program.
