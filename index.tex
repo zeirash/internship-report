@@ -97,7 +97,7 @@
         \addtocontents{toc}{\begingroup\protect\setlength{\protect\cftsecindent}{0pt}\protect\contentsline{section}{Title page}{2}}
         \addtocontents{toc}{\begingroup\protect\setlength{\protect\cftsecindent}{0pt}\protect\contentsline{section}{Originality statement page}{3}}
         \addtocontents{toc}{\begingroup\protect\setlength{\protect\cftsecindent}{0pt}\protect\contentsline{section}{Preface}{4}}
-        \addtocontents{toc}{\begingroup\protect\setlength{\protect\cftsecindent}{0pt}\protect\contentsline{section}{Table of contents}{5}}
+        \addtocontents{toc}{\begingroup\protect\setlength{\protect\cftsecindent}{0pt}\protect\contentsline{section}{Table of contents}{6}}
         \addtocontents{toc}{\endgroup}
         \tableofcontents
         \renewcommand{\baselinestretch}{1.5}\normalsize
@@ -108,4 +108,8 @@
         \input{chapters/1one/one.tex}
         \input{chapters/2two/two.tex}
         \input{chapters/3three/three.tex}
+        
+        \addtocontents{toc}{\protect\contentsline{chapter}{Learning plan}{}}
+        \addtocontents{toc}{\protect\contentsline{chapter}{Logbook}{}}
+        
     \end{document}
